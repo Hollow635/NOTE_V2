@@ -1,0 +1,235 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('../imagenes/compus.png'); /* Ruta de tu imagen */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    background-color: #ff3232;
+    padding: 10px 20px;
+}
+
+.logo-container {
+    flex: 0 0 auto;
+}
+
+.logo {
+    width: 80px; 
+    height: auto;
+}
+
+.logo-container .logo {
+    width: 50px;
+    vertical-align: middle;
+}
+
+.menu {
+    flex: 1; 
+    display: flex;
+    justify-content: flex-end; 
+}
+
+.menu-list {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-item {
+    padding: 10px 20px;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+}
+
+.menu-item:not(:last-child) {
+    border-right: 1px solid #ffffff; 
+}
+
+.menu-item:hover {
+    background-color: #ff4d4d; 
+}
+
+.main-content {
+    padding: 20px;
+}
+
+.status-title {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.status-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between; 
+    gap: 50px; 
+    max-width: 900px; 
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px; 
+    border-radius: 8px;
+}
+
+.computer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.computer-item {
+    display: flex;
+    align-items: center;
+    gap: 25px; 
+    font-weight: bold;
+    color: #333;
+    cursor: pointer; 
+}
+
+.status {
+    width: 50px;
+    height: 20px;
+    border-radius: 5px;
+}
+
+.status-container {
+    display: flex;
+    flex-wrap: wrap; /* Esto permitirá que las listas de A-F y G-L se alineen mejor si necesitan espacio */
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 50px;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.available {
+    background-color: #4CAF50; 
+}
+
+.unavailable {
+    background-color: #FF3333; 
+}
+
+.maintenance {
+    background-color: #FFA500; 
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; 
+}
+
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+    max-width: 600px; 
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .status-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .computer-list {
+        gap: 5px;
+    }
+}
+
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+    max-width: 600px; 
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+    .computer-item {
+        width: 100%;
+    }
+}
+
+.request-button {
+    background-color: #ff4d4d; /* Rojo */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.request-button:hover {
+    background-color: #ff3333;
+}
