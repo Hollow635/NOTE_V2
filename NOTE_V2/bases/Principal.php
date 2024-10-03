@@ -33,7 +33,7 @@ $computers = [
     ],
 
     'C' => [
-        ['id' => 'C01', 'status' => 'available', 'message' => 'Esta notebook no está disponible, por favor elija otra.'],  //ocupado
+        ['id' => 'C01', 'status' => 'available', 'message' => 'Esta notebook se encuentra disponible'],  //disponible
         ['id' => 'C02', 'status' => 'unavailable', 'message' => 'Esta notebook no está disponible, por favor elija otra'],  //ocupado
         ['id' => 'C03', 'status' => 'available', 'message' => 'Esta notebook se encuentra disponible'], //disponible
         ['id' => 'C04', 'status' => 'unavailable', 'message' => 'Esta notebook no está disponible, por favor elija otra.'], //ocupado
@@ -46,12 +46,12 @@ $computers = [
     ],
 
     'D' => [
-        ['id' => 'D01', 'status' => 'available', 'message' => 'Esta notebook no está disponible, por favor elija otra.'],  //disponible
+        ['id' => 'D01', 'status' => 'unavailable', 'message' => 'Esta notebook no está disponible, por favor elija otra'],  //ocupado
         ['id' => 'D02', 'status' => 'unavailable', 'message' => 'Esta notebook no está disponible, por favor elija otra'],  //ocupado
-        ['id' => 'D03', 'status' => 'available', 'message' => 'Esta notebook se encuentra disponible'],  //mantenimiento
-        ['id' => 'D04', 'status' => 'available', 'message' => 'Esta notebook se encuentra disponible'],
-        ['id' => 'D05', 'status' => 'maintenance', 'message' => 'Esta notebook se encuentra en mantenimiento, no está disponible hasta nuevo aviso :('],
-        ['id' => 'D06', 'status' => 'available', 'message' => 'Esta notebook se encuentra disponible'],
+        ['id' => 'D03', 'status' => 'available', 'message' => 'Esta notebook se encuentra disponible'],  //disponible
+        ['id' => 'D04', 'status' => 'available', 'message' => 'Esta notebook se encuentra disponible'],  //disponible
+        ['id' => 'D05', 'status' => 'unavailable', 'message' => 'Esta notebook no está disponible, por favor elija otra.'],  //ocupado
+        ['id' => 'D06', 'status' => 'maintenance', 'message' => 'Esta notebook se encuentra en mantenimiento, no está disponible hasta nuevo aviso :('],  //disponible
         ['id' => 'D07', 'status' => 'available', 'message' => 'Esta notebook está disponible'],
         ['id' => 'D08', 'status' => 'maintenance', 'message' => 'Esta notebook se encuentra en mantenimiento, no está disponible hasta nuevo aviso :('],
         ['id' => 'D09', 'status' => 'unavailable', 'message' => 'Esta notebook no está disponible, por favor elija otra.'],
@@ -59,23 +59,23 @@ $computers = [
     ],
 
     'E' => [
-        ['id' => 'E01', 'status' => 'available', 'message' => 'Esta notebook no está disponible, por favor elija otra.'],
+        ['id' => 'E01', 'status' => 'unavailable', 'message' => 'Esta notebook no está disponible, por favor elija otra.'],
         ['id' => 'E02', 'status' => 'unavailable', 'message' => 'Esta notebook no está disponible, por favor elija otra'],
-        ['id' => 'E03', 'status' => 'available', 'message' => 'Esta notebook se encuentra disponible'],
+        ['id' => 'E03', 'status' => 'unavailable', 'message' => 'Esta notebook no esta disponible, por favor elija otra'],
         ['id' => 'E04', 'status' => 'available', 'message' => 'Esta notebook se encuentra disponible'],
-        ['id' => 'E05', 'status' => 'maintenance', 'message' => 'Esta notebook se encuentra en mantenimiento, no está disponible hasta nuevo aviso :('],
+        ['id' => 'E05', 'status' => 'available', 'message' => 'Esta notebook se encuentra disponible'],
         ['id' => 'E06', 'status' => 'available', 'message' => 'Esta notebook se encuentra disponible'],
         ['id' => 'E07', 'status' => 'available', 'message' => 'Esta notebook está disponible'],
-        ['id' => 'E08', 'status' => 'maintenance', 'message' => 'Esta notebook se encuentra en mantenimiento, no está disponible hasta nuevo aviso :('],
-        ['id' => 'E09', 'status' => 'unavailable', 'message' => 'Esta notebook no está disponible, por favor elija otra.'],
+        ['id' => 'E08', 'status' => 'available', 'message' => 'Esta notebook está disponible'],
+        ['id' => 'E09', 'status' => 'available', 'message' => 'Esta notebook está disponible'],
         ['id' => 'E10', 'status' => 'maintenance', 'message' => 'Esta notebook se encuentra en mantenimiento, no esta disponible hasta nuevo aviso :(.'],
     ],
     
     'F' => [
         ['id' => 'F01', 'status' => 'available', 'message' => 'Esta notebook no está disponible, por favor elija otra.'],
-        ['id' => 'F02', 'status' => 'unavailable', 'message' => 'Esta notebook no está disponible, por favor elija otra'],
-        ['id' => 'F03', 'status' => 'available', 'message' => 'Esta notebook se encuentra disponible'],
-        ['id' => 'F04', 'status' => 'available', 'message' => 'Esta notebook se encuentra disponible'],
+        ['id' => 'F02', 'status' => 'available', 'message' => 'Esta notebook está disponible'],
+        ['id' => 'F03', 'status' => 'maintenance', 'message' => 'Esta notebook se encuentra en mantenimiento, no está disponible hasta nuevo aviso :('],
+        ['id' => 'F04', 'status' => 'maintenance', 'message' => 'Esta notebook se encuentra en mantenimiento, no está disponible hasta nuevo aviso :('],
         ['id' => 'F05', 'status' => 'maintenance', 'message' => 'Esta notebook se encuentra en mantenimiento, no está disponible hasta nuevo aviso :('],
         ['id' => 'F06', 'status' => 'available', 'message' => 'Esta notebook se encuentra disponible'],
         ['id' => 'F07', 'status' => 'available', 'message' => 'Esta notebook está disponible'],
@@ -345,6 +345,19 @@ $computers = [
     ],
     
 ];
+
+$availableComputers = [];
+$unavailableComputers = [];
+
+foreach ($computers as $category => $computersList) {
+    foreach ($computersList as $computer) {
+        if ($computer['status'] == 'available') {
+            $availableComputers[$category][] = $computer;
+        } else {
+            $unavailableComputers[$category][] = $computer;
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
