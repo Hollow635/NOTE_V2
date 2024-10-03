@@ -27,7 +27,7 @@
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $password = $_POST['password'];
 
-            if ($password === 'Sarmiento') {
+            if ($password === 'Sarmiento') {  //Si queres cambiar la contraseña solo cambia lo que esta entre comillas
                 header("Location: ../bases/crear_usuario.php");
                 exit();
             } else {
