@@ -9,7 +9,7 @@ session_unset();
 session_destroy();
 
 // Redirige al usuario a la página de inicio (index.php)
-header("Location: index.php");
+header("Location: ../bases/index.php");
 
 // Asegura que no se ejecute más código después de la redirección
 exit();
