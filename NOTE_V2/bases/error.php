@@ -24,7 +24,7 @@
             <p>Perdon, la pagina que esta buscando no existe. Le pedimos que nos disculpe y vuelva en otra ocasion</p>
             <div class="btns">
                 <!-- Botón que redirige al usuario de vuelta a la página principal -->
-                <button onclick="window.location.href='../bases/Principal.php'">Volver</button>
+                <button onclick="window.location.href='../bases/servicio_basico.php'">Volver</button>
             </div>
         </div>
     </div>
