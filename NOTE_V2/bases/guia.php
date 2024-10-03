@@ -100,7 +100,7 @@
 					<p class="respuesta">Usa contraseñas fuertes y únicas, activa la autenticación de dos factores y no compartas tu información de inicio de sesión.</p>
 				</div>
 				<div class="contenedor-pregunta">
-					<p class="pregunta">¿Qué debo hacer si sospecho que mi cuenta esta en riesgo? <img src="..7imagenes/suma.svg" alt="Abrir Respuesta" /></p>
+					<p class="pregunta">¿Qué debo hacer si sospecho que mi cuenta esta en riesgo? <img src="../imagenes/suma.svg" alt="Abrir Respuesta" /></p>
 					<p class="respuesta">Cambia tu contraseña inmediatamente, revisa la actividad reciente de la cuenta y contacta al soporte técnico.</p>
 				</div>
 			</div>
@@ -108,7 +108,7 @@
 			<!-- Preguntas de la categoría Cuenta -->
 			<div class="contenedor-preguntas" data-categoria="cuenta">
 				<div class="contenedor-pregunta">
-					<p class="pregunta">¿Que necesito para crear una cuenta? <img src="..7imagenes/suma.svg" alt="Abrir Respuesta" /></p>
+					<p class="pregunta">¿Que necesito para crear una cuenta? <img src="../imagenes/suma.svg" alt="Abrir Respuesta" /></p>
 					<li class="respuesta">
 						<!-- Lista de requisitos para crear una cuenta -->
 						<ul>
