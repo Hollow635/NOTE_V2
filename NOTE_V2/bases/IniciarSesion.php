@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } else {
         // Mensaje si no se encontró un usuario
-        echo "<script>alert('Por favor ingrese un usuario válido'); window.location.href='../bases/login.php';</script>";
+        echo "<script>alert('Algo ha salido mal. Intente nuevamente'); window.location.href='../bases/login.php';</script>";
     }
 
     // Cierra la declaración preparada
