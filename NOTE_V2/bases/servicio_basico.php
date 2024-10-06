@@ -37,6 +37,8 @@ $computers = [
         ['id' => 'C07', 'status' => 'available', 'message' => 'Esta notebook se encuentra disponible, si desea pedirla presione en Pedir.'],
         // Agrega más notebooks según sea necesario
     ],
+    // esto continua hasta la letra z
+    
 
     'D' => [  //notebooks de la seccion D
         ['id' => 'D03', 'status' => 'available', 'message' => 'Esta notebook se encuentra disponible, si desea pedirla presione en Pedir.'],
@@ -288,7 +290,7 @@ $computers = [
 
         <!-- Botón para realizar el pedido de computadoras -->
     <div class="order-button-container" style="text-align: center; margin-top: 20px;">
-        <input type="button" value="Ordenar" class="request-button" onclick="location.href='prestamo.php'">
+        <input type="button" value="Ordenar" class="request-button" onclick="location.href='../bases/prestamo.php'">
     </div>
     </main>
 
