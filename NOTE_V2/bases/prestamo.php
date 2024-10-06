@@ -10,7 +10,8 @@ $computers = [
     'B' => [['id' => 'B02', 'status' => 'available'], ['id' => 'B03', 'status' => 'available'],['id' => 'B04', 'status' => 'available'], ['id' => 'B06', 'status' => 'available'], ['id' => 'B10', 'status' => 'available']],
     
     'C' => [['id' => 'C01', 'status' => 'available'], ['id' => 'C03', 'status' => 'available'],['id' => 'B06', 'status' => 'available'], ['id' => 'B07', 'status' => 'available']],
-    
+    //esto continua hasta la letra z
+
     'D' => [['id' => 'D03', 'status' => 'available'], ['id' => 'D04', 'status' => 'available'],['id' => 'D07', 'status' => 'available']],
     
     'E' => [['id' => 'E04', 'status' => 'available'], ['id' => 'E05', 'status' => 'available'],['id' => 'E06', 'status' => 'available'], ['id' => 'E07', 'status' => 'available'], ['id' => 'E08', 'status' => 'available'], ['id' => 'E09', 'status' => 'available']],
@@ -64,38 +65,30 @@ $message = '';
 $reservadas = [];
 $prestamoRealizado = false;
 
-// Asegúrate de que el id del usuario está almacenado en la sesión
-$idUsuario = isset($_SESSION['id']) ? $_SESSION['id'] : null;
-$nombreUsuario = isset($_POST['usuario']) ? trim($_POST['usuario']) : "Hi"; // Obtener el nombre del formulario
+$emailUsuario = isset($_SESSION['email']) ? $_SESSION['email'] : null; // Obtener el email del usuario
+$nombreUsuario = ''; // Inicializar nombreUsuario
 
-// Depuración: Verificar el ID del usuario
-if ($idUsuario) {
-    echo 'ID de usuario en sesión: ' . htmlspecialchars($idUsuario); // Debugging
-
+if ($emailUsuario) {
     // Consulta para obtener el nombre del usuario desde la base de datos
     try {
-        $conn = new PDO("mysql:host=$db_host;dbname=pp_note", $db_user, $db_pass); // Conexión a la base de datos
+        $conn = new PDO("mysql:host=$db_host;dbname=pp_note", $db_user, $db_pass);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-        // Preparar y ejecutar la consulta
-        $stmt = $conn->prepare("SELECT nombre FROM usuario WHERE id = :id");
-        $stmt->bindParam(':id', $idUsuario);
+        $stmt = $conn->prepare("SELECT nombre FROM usuario WHERE email = :email");
+        $stmt->bindParam(':email', $emailUsuario);
         $stmt->execute();
 
-        // Obtener el nombre
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($usuario) {
             $nombreUsuario = $usuario['nombre'];
         } else {
-            echo 'Usuario no encontrado'; // Debugging
+            $message = 'Usuario no encontrado'; // Debugging
         }
-
     } catch (PDOException $e) {
-        echo "Error en la conexión: " . $e->getMessage(); // Manejo de errores
+        $message = "Error en la conexión: " . $e->getMessage(); // Manejo de errores
     }
 }
 
-// Manejo del formulario al ser enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cantidad = intval($_POST['cantidad']);
     $horaInicio = $_POST['horaInicio'];
@@ -110,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         // Asignar notebooks aleatoriamente
         $availableNotebooks = [];
-        foreach ($computers as $category => &$notebooks) {
+        foreach ($computers as &$notebooks) {
             foreach ($notebooks as &$notebook) {
                 if ($notebook['status'] === 'available') {
                     $availableNotebooks[] = &$notebook;
@@ -118,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        shuffle($availableNotebooks); // Mezclar las notebooks disponibles
+        shuffle($availableNotebooks);
         $notebooksAsignadas = array_slice($availableNotebooks, 0, $cantidad);
         
         if (count($notebooksAsignadas) < $cantidad) {
@@ -151,7 +144,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </header>
     <main class="main-content">
         <form method="POST" action="">
-            
             <label for="cantidad">Cantidad de computadoras (máx. 12):</label>
             <input type="number" id="cantidad" name="cantidad" min="1" max="12" required>  
             <br><br>
@@ -180,7 +172,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <!-- Ventana Modal -->
         <?php if ($prestamoRealizado): ?>
-        <div id="myModal" class="modal">
+        <div id="myModal" class="modal" style="display:none;">
             <div class="modal-content">
                 <span class="close" onclick="closeModal()">&times;</span>
                 <h3>Información de su Préstamo</h3>
@@ -191,38 +183,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
         <?php endif; ?>
-    
     </main>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
         async function generarPDF() {
             const { jsPDF } = window.jspdf;
-            
-            // Crear una instancia del PDF
             const doc = new jsPDF();
-
-            // Capturar los datos del préstamo
             const nombreUsuario = "<?php echo htmlspecialchars($nombreUsuario); ?>";
+            const emailUsuario = "<?php echo htmlspecialchars($emailUsuario); ?>";
             const cantidad = "<?php echo htmlspecialchars($cantidad); ?>";
             const horaInicio = "<?php echo htmlspecialchars($horaInicio); ?>";
             const horaFin = "<?php echo htmlspecialchars($horaFin); ?>";
             const notebooksAsignadas = "<?php echo implode(', ', $reservadas); ?>";
 
-            // Titulo del documento
             doc.setFontSize(16);
-            doc.text("Comprobante de Préstamo de Notebooks", 10, 10);
+            doc.text("Comprobante de Préstamo de Notebooks", 20, 20);
+            doc.text("Nombre: " + nombreUsuario, 20, 30);
+            doc.text("Email: " + emailUsuario, 20, 40);
+            doc.text("Cantidad de Computadoras: " + cantidad, 20, 50);
+            doc.text("Hora de Inicio: " + horaInicio, 20, 60);
+            doc.text("Hora de Fin: " + horaFin, 20, 70);
+            doc.text("Notebooks Asignadas: " + notebooksAsignadas, 20, 80);
 
-            // Añadir detalles del préstamo al PDF
-            doc.setFontSize(12);
-            doc.text("Cantidad de Notebooks: " + cantidad, 10, 30);
-            doc.text("Hora de Inicio: " + horaInicio, 10, 40);
-            doc.text("Hora de Fin: " + horaFin, 10, 50);
-            doc.text("Notebooks Asignadas: " + notebooksAsignadas, 10, 60);
-
-            // Generar y descargar el PDF
             doc.save("comprobante_prestamo.pdf");
         }
-    
+
         function openModal() {
             document.getElementById("myModal").style.display = "block";
         }
@@ -230,15 +216,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         function closeModal() {
             document.getElementById("myModal").style.display = "none";
         }
-
-        window.onclick = function(event) {
-            var modal = document.getElementById("myModal");
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
     </script>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 </html>
