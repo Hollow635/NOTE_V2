@@ -1,80 +1,89 @@
 <?php  
 session_start(); // Inicia la sesión
 
-// Verifica si el usuario está autenticado
 if (!isset($_SESSION['email']) || !isset($_SESSION['name'])) {
     header("Location: ../bases/login.php");
     exit();
 }
 
-// Conexión a la base de datos
 $conn = new mysqli("localhost", "root", "", "pp_note");
 if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
 
-// Inicializa las variables de búsqueda
 $searchTerm = '';
 $selectedLetter = '';
+$selectedStatus = '';
 
 // Manejo de computadoras (CRUD)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Agregar computadora
     if (isset($_POST['add_computer'])) {
-        // Agregar computadora
         $computerName = $_POST['NOMBRE'];
         $brand = $_POST['MARCA'];
-        $status = $_POST['estado']; // Captura el estado del formulario
-
-        // Insertar en la base de datos
+        $status = $_POST['estado'];
+        
         $sql = "INSERT INTO COMPUTADORA (NOMBRE, MARCA, estado) VALUES (?, ?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("sss", $computerName, $brand, $status);
-        $stmt->execute();
+        if ($stmt->execute()) {
+            echo "<script>alert('Computadora agregada exitosamente.');</script>";
+        } else {
+            echo "<script>alert('Error al agregar la computadora.');</script>";
+        }
     }
 
+    // Eliminar computadora
     if (isset($_POST['delete_computer'])) {
-        // Eliminar computadora
         $computerId = $_POST['computer_id'];
         $sql = "DELETE FROM COMPUTADORA WHERE NOMBRE = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $computerId);
-        $stmt->execute();
+        if ($stmt->execute()) {
+            echo "<script>alert('Computadora eliminada exitosamente.');</script>";
+        } else {
+            echo "<script>alert('Error al eliminar la computadora.');</script>";
+        }
     }
 
+    // Cambiar estado de la computadora
     if (isset($_POST['change_status'])) {
-        // Cambiar estado de la computadora
         $computerId = $_POST['computer_id'];
         $newStatus = $_POST['new_status'];
         $sql = "UPDATE COMPUTADORA SET estado = ? WHERE NOMBRE = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ss", $newStatus, $computerId);
-        $stmt->execute();
+        if ($stmt->execute()) {
+            echo "<script>alert('Estado actualizado exitosamente.');</script>";
+        } else {
+            echo "<script>alert('Error al cambiar el estado.');</script>";
+        }
     }
 
-    // Captura la letra seleccionada
+    // Filtrar por letra o término de búsqueda
     if (isset($_POST['letter'])) {
         $selectedLetter = $_POST['letter'];
     }
-
-    // Captura el término de búsqueda por nombre
     if (isset($_POST['search_name'])) {
         $searchTerm = $_POST['search_term'];
     }
+    // Filtrar por estado
+    if (isset($_POST['search_status'])) {
+        $selectedStatus = $_POST['status'];
+    }
 }
 
-// Consulta de computadoras filtradas por letra o nombre
-$sql = "SELECT * FROM COMPUTADORA WHERE NOMBRE LIKE ?";
+// Consulta de computadoras
+$sql = "SELECT * FROM COMPUTADORA WHERE NOMBRE LIKE ? ";
 $letterParam = $selectedLetter ? $selectedLetter . '%' : '%';
-$searchParam = '%' . $searchTerm . '%';
-
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $letterParam);
 $stmt->execute();
 $computersByLetter = $stmt->get_result();
 
-// Si hay un término de búsqueda, filtra por nombre
+$searchParam = '%' . $searchTerm . '%';
 if ($searchTerm) {
-    $sql = "SELECT * FROM COMPUTADORA WHERE NOMBRE LIKE ?";
+    $sql = "SELECT * FROM COMPUTADORA WHERE NOMBRE LIKE ? ORDER BY NOMBRE ASC";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $searchParam);
     $stmt->execute();
@@ -83,7 +92,18 @@ if ($searchTerm) {
     $computersByName = $computersByLetter;
 }
 
-$conn->close(); // Cierra la conexión
+// Filtrar por estado
+if ($selectedStatus) {
+    $sql = "SELECT * FROM COMPUTADORA WHERE estado = ? ORDER BY NOMBRE ASC";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $selectedStatus);
+    $stmt->execute();
+    $computersByStatus = $stmt->get_result();
+} else {
+    $computersByStatus = $computersByName; // Si no hay estado seleccionado, mostrar los resultados de búsqueda por nombre
+}
+
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -103,7 +123,7 @@ $conn->close(); // Cierra la conexión
         <nav class="menu">
             <ul class="menu-list">
                 <li class="menu-item"><a href="../bases/manejo_Usuario.php" class="logout-link"> Controlar a los usuarios --> </a></li>
-                <li class="menu-item"><a href="../bases/control.php" class="logout-link"> Regitro de los prestamos --> </a></li>
+                <li class="menu-item"><a href="../bases/control.php" class="logout-link"> Registro de los préstamos --> </a></li>
                 <li class="menu-item"><a href="../bases/administracion.php" class="logout-link"> <-- Volver Atras</a></li>
                 <li class="menu-item"><a href="../bases/Principal.php" class="logout-link"> <-- Ir a la primera vista</a></li>
             </ul>
@@ -140,6 +160,17 @@ $conn->close(); // Cierra la conexión
         <input type="submit" name="search_name" value="Buscar" class="action-button">
     </form>
 
+    <h3 style="color: white;">Buscar Computadoras por Estado</h3>
+    <form method="POST">
+        <select name="status" required>
+            <option value="">Seleccionar estado</option>
+            <option value="Disponible">Disponible</option>
+            <option value="Ocupada">Ocupada</option>
+            <option value="Mantenimiento">Mantenimiento</option>
+        </select>
+        <input type="submit" name="search_status" value="Buscar" class="action-button">
+    </form>
+
     <h3 class="computer-list-title" style="color: green;">Lista de Computadoras</h3>
     <div class="computer-list-container">
         <table>
@@ -152,7 +183,7 @@ $conn->close(); // Cierra la conexión
                 </tr>
             </thead>
             <tbody>
-                <?php while ($computer = $computersByName->fetch_assoc()): ?>
+                <?php while ($computer = $computersByStatus->fetch_assoc()): ?>
                     <tr>
                         <td><?php echo htmlspecialchars($computer['NOMBRE']); ?></td>
                         <td><?php echo htmlspecialchars($computer['MARCA']); ?></td>

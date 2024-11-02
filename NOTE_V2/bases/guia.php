@@ -81,7 +81,8 @@
 				</div>
 				<div class="contenedor-pregunta">
 					<p class="pregunta">¿Como se validan el prestamo al buscar las notebooks? <img src="../imagenes/suma.svg" alt="Abrir Respuesta" /></p>
-					<p class="respuesta">Estamos trabajando en como se realizara eso </p>
+					<p class="respuesta">Para validar el prestamo el alumno o profesor debera mostrar el comprobante del prestamo al 
+						momento de retirar las computadoras solicitadas o de lo contrario se les negara el uso de las mismas </p>
 				</div>
 			</div>
 
@@ -97,7 +98,7 @@
 				</div>
 				<div class="contenedor-pregunta">
 					<p class="pregunta">¿Cómo puedo proteger mi cuenta contra accesos no autorizados? <img src="../imagenes/suma.svg" alt="Abrir Respuesta" /></p>
-					<p class="respuesta">Usa contraseñas fuertes y únicas, activa la autenticación de dos factores y no compartas tu información de inicio de sesión.</p>
+					<p class="respuesta">Usa contraseñas fuertes y únicas que sean faciles de memorizar y no compartas tu información de inicio de sesión.</p>
 				</div>
 				<div class="contenedor-pregunta">
 					<p class="pregunta">¿Qué debo hacer si sospecho que mi cuenta esta en riesgo? <img src="../imagenes/suma.svg" alt="Abrir Respuesta" /></p>

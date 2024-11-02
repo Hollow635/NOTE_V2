@@ -52,5 +52,6 @@
         include("../bases/RegistrarProfe.php");
     ?>
     <script src="../js/script.js"></script>
+    <script src="../js/form_animate.js"></script> <!-- Enlace a otro script JavaScript -->
 </body>
 </html>

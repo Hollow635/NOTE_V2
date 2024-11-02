@@ -53,5 +53,6 @@
 
     <!-- Enlace al script JavaScript para manejar interacciones del formulario -->
     <script src="../js/script.js"></script>
+    <script src="../js/form_animate.js"></script>
 </body>
 </html>
