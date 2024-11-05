@@ -89,12 +89,12 @@
 			<!-- Preguntas de la categoría Seguridad -->
 			<div class="contenedor-preguntas" data-categoria="seguridad">
 				<div class="contenedor-pregunta">
-					<p class="pregunta">¿Que pasa con mis datos personales? <img src="../imagenes/suma.svg" alt="Abrir Respuesta" /></p>
-					<p class="respuesta">No se preocupe, sus datos estan bien almacenados y protegidos en nuestra base de datos donde estamos mejorandola constatemente para evitar perdida de informacion personal.</p>
+					<p class="pregunta">¿Qué pasa con mis datos personales? <img src="../imagenes/suma.svg" alt="Abrir Respuesta" /></p>
+					<p class="respuesta">No se preocupe, sus datos están bien almacenados y protegidos en nuestra base de datos donde estamos mejorandola constatemente para evitar perdida de informacion personal.</p>
 				</div>
 				<div class="contenedor-pregunta">
 					<p class="pregunta">¿El sistema es confiable? <img src="../imagenes/suma.svg" alt="Abrir Respuesta" /></p>
-					<p class="respuesta">Por suspuesto, este sistema esta en constante actualizaciones y es un proyecto realizado por alumnos del grupo Compilando Compus de 6°2° COM.</p>
+					<p class="respuesta">Por supuesto, este sistema esta en constante actualizaciones y es un proyecto realizado por alumnos del grupo Compilando Compus de 6°2° COM.</p>
 				</div>
 				<div class="contenedor-pregunta">
 					<p class="pregunta">¿Cómo puedo proteger mi cuenta contra accesos no autorizados? <img src="../imagenes/suma.svg" alt="Abrir Respuesta" /></p>
@@ -113,17 +113,17 @@
 					<li class="respuesta">
 						<!-- Lista de requisitos para crear una cuenta -->
 						<ul>
-							<li>informacion valida para realizar la inscripcion, esto evitara fallas en el registro. </li>
-							<li>Usar un email valido o proporcionado por el Krause, (si usa datos falsos el sistema se ocupara de negarles el acceso).</li>
-							<li>Acceso a una computadora o celular y que esten conectados a la red wifi "BA Escuela".</li>
+							<li>Información valida para realizar la inscripción, esto evitará fallas en el registro. </li>
+							<li>Usar un email valido o proporcionado por el Krause, (si usa datos falsos el sistema se ocupará de negarles el acceso).</li>
+							<li>Acceso a una computadora o celular y que estén conectados a la red wifi "BA Escuela".</li>
 						</ul>
 				</div>
 				<div class="contenedor-pregunta">
-					<p class="pregunta">¿Como puedo cambiar mi contraseña? <img src="../imagenes/suma.svg" alt="Abrir Respuesta" /></p>
-					<p class="respuesta">Si usted quiere cambiar su contraseña, tendra que hacerlo por medio de un formulario que podra ver en la siguiente pagina. <a href="new_password.php" class="create-account">Ingrese Aqui</a> </p>
+					<p class="pregunta">¿Cómo puedo cambiar mi contraseña? <img src="../imagenes/suma.svg" alt="Abrir Respuesta" /></p>
+					<p class="respuesta">Si usted quiere cambiar su contraseña, tendrá que hacerlo por medio de un formulario que podrá ver en la siguiente página. <a href="new_password.php" class="create-account">Ingrese Aqui</a> </p>
 				</div>
 				<div class="contenedor-pregunta">
-					<p class="pregunta">¿Que debo hacer si decido borrar mi cuenta del sistema? <img src="../imagenes/suma.svg" alt="Abrir Respuesta" /></p>
+					<p class="pregunta">¿Qué debo hacer si decido borrar mi cuenta del sistema? <img src="../imagenes/suma.svg" alt="Abrir Respuesta" /></p>
 					<p class="respuesta">Si quiere borrarse del sistema debe comunicarse con uno de los desarrolladores para obtener ayuda </p>
 				</div>      
 				<div class="contenedor-pregunta">
@@ -133,7 +133,13 @@
 				<div class="contenedor-pregunta">
     				<p class="pregunta">Obtener guía de usuario para alumnos y profesores <img src="../imagenes/suma.svg" alt="Abrir Respuesta" /></p>
     				<p class="respuesta"> Puedes descargar la guía de usuario haciendo clic en el siguiente enlace: 
-        				<a href="../documentos/Manual de Usuario.pdf" class="create-account" download>Descargar Guía de Usuario</a>
+        				<a href="../documentos/Manual de Usuario.pdf" class="create-account" download>Descargar Guía de Usuario para alumnos / profes</a>
+    					</p>
+				</div>
+				<div class="contenedor-pregunta">
+    				<p class="pregunta">Obtener guía de usuario para administradores <img src="../imagenes/suma.svg" alt="Abrir Respuesta" /></p>
+    				<p class="respuesta"> Puedes descargar la guía de usuario haciendo clic en el siguiente enlace: 
+        				<a href="../documentos/Manual de Usuario (Administrador).pdf" class="create-account" download>Descargar Guía para Administradores</a>
     					</p>
 				</div>
 			</div>

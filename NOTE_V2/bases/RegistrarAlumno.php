@@ -2,12 +2,10 @@
 // Incluye el archivo de conexión a la base de datos
 include("../bases/conexion.php");
 
-// Función para determinar el tipo de usuario
 function determinarTipoUsuario($nombre) {
     return 'Alumno';
 }
 
-// Verifica si se ha enviado el formulario de registro
 if (isset($_POST['register'])) {
     $division = trim($_POST['division']);
     $division_valida = false;
@@ -67,7 +65,10 @@ if (isset($_POST['register'])) {
             if ($consulta) {
                 $consulta->bind_param("sssssssd", $name, $email, $hashed_password, $division, $especialidad, $tipo_usuario, $fecha, $activo);
                 if ($consulta->execute()) {
-                    echo "<h3 class='success'>Tu registro como alumno se ha completado, pero debes esperar a que un administrador active tu cuenta.</h3>";
+                    // Mostrar mensaje de notificación en lugar de mensaje en verde
+                    echo "<div id='success-notification' class='notification success-notification'>
+                            <p>Tu usuario se ha creado exitosamente, espera la validación por parte de un administrador.</p>
+                          </div>";
                 } else {
                     echo "<h3 class='error'>Ocurrió un error al registrarse: " . $consulta->error . "</h3>";
                 }

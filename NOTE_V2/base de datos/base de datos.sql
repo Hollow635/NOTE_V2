@@ -80,3 +80,5 @@ DELETE FROM usuario WHERE id = 6;
 
 ALTER TABLE usuario ADD COLUMN activo TINYINT(1) DEFAULT 0;
 
+-- revisa si es necesario la existencia de la tabla NOTEBOOKS_SOLICITADAS ya que al parecer id_solicitud y id_prestamo son iguales
+-- esto lo ves mañana

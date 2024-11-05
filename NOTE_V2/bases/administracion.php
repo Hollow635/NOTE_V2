@@ -38,6 +38,7 @@ $name = $_SESSION['name'];
     <h2>Opciones de Administración</h2>
     <ul>
         <li><a href="manejo_Usuario.php">Gestionar Usuarios</a></li>
+        <li><a href="mantenimiento.php">Manten. Notebooks</a></li>
         <li><a href="manejo_Compu.php">Gestionar Computadoras</a></li>
         <li><a href="control.php" class="active">Registro de los Préstamos</a></li> <!-- Cambiado aquí -->
     </ul>

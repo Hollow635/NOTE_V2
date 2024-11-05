@@ -100,11 +100,18 @@ $conn->close(); // Cierra la conexión
     <div class="logo-container">
         <img src="../imagenes/OK.png" alt="Escudo" class="logo"> 
     </div>
+    <!-- Barra de navegación con botones alineados a la izquierda -->
     <nav class="menu">
         <ul class="menu-list">
-            <li class="menu-item"><a href="../bases/manejo_Compu.php" class="logout-link"> Controlar las Notebooks --> </a></li>
-            <li class="menu-item"><a href="../bases/control.php" class="logout-link"> Registro de los prestamos --> </a></li>
-            <li class="menu-item"><a href="../bases/administracion.php" class="logout-link"> <-- Volver Atras</a></li>
+            <li class="menu-item">
+                <a href="../bases/manejo_Compu.php" class="logout-link">Controlar las Notebooks</a>
+            </li>
+            <li class="menu-item">
+                <a href="../bases/control.php" class="logout-link">Registro de los prestamos</a>
+            </li>
+            <li class="menu-item">
+                <a href="../bases/administracion.php" class="logout-link">Volver Atras</a>
+            </li>
         </ul>
     </nav>
 </header>

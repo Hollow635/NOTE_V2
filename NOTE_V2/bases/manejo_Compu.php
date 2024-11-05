@@ -54,9 +54,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ss", $newStatus, $computerId);
         if ($stmt->execute()) {
-            echo "<script>alert('Estado actualizado exitosamente.');</script>";
+            // Eliminar la línea con el mensaje de éxito
         } else {
             echo "<script>alert('Error al cambiar el estado.');</script>";
+        }
+    }
+
+    // Designar a mantenimiento
+    if (isset($_POST['poner_mantenimiento'])) {
+        $notebookId = $_POST['notebook_id']; // ID de la computadora seleccionada
+        $descripcion = "Mantenimiento programado"; // Descripción de mantenimiento
+        $fecha_mantenimiento = date('Y-m-d'); // Fecha actual
+
+        // Comprobar si $notebookId tiene un valor
+        if (empty($notebookId)) {
+            echo "<script>alert('ID de computadora no encontrado.');</script>";
+        } else {
+            // Inserta en la tabla MANTENIMIENTO
+            $insertStmt = $conn->prepare("INSERT INTO MANTENIMIENTO (DESCRIPCION, FECHA_MANTENIMIENTO, NOMBRE_COMPUTADORA) VALUES (?, ?, ?)");
+            if ($insertStmt) {
+                $insertStmt->bind_param("sss", $descripcion, $fecha_mantenimiento, $notebookId);
+                if ($insertStmt->execute()) {
+                    // Actualiza el estado de la computadora
+                    $updateStmt = $conn->prepare("UPDATE COMPUTADORA SET estado = 'Mantenimiento' WHERE NOMBRE = ?");
+                    if ($updateStmt) {
+                        $updateStmt->bind_param("s", $notebookId);
+                        if ($updateStmt->execute()) {
+                            echo "<script>alert('La computadora ha sido designada para mantenimiento.');</script>";
+                        } else {
+                            echo "<script>alert('Error al actualizar el estado de la computadora: " . $updateStmt->error . "');</script>";
+                        }
+                    } else {
+                        echo "<script>alert('Error al preparar la consulta de actualización: " . $conn->error . "');</script>";
+                    }
+                } else {
+                    echo "<script>alert('Error al insertar en la tabla de mantenimiento: " . $insertStmt->error . "');</script>";
+                }
+            } else {
+                echo "<script>alert('Error al preparar la consulta de inserción: " . $conn->error . "');</script>";
+            }
         }
     }
 
@@ -125,7 +161,6 @@ $conn->close();
                 <li class="menu-item"><a href="../bases/manejo_Usuario.php" class="logout-link"> Controlar a los usuarios --> </a></li>
                 <li class="menu-item"><a href="../bases/control.php" class="logout-link"> Registro de los préstamos --> </a></li>
                 <li class="menu-item"><a href="../bases/administracion.php" class="logout-link"> <-- Volver Atras</a></li>
-                <li class="menu-item"><a href="../bases/Principal.php" class="logout-link"> <-- Ir a la primera vista</a></li>
             </ul>
         </nav>
     </header>
@@ -202,6 +237,10 @@ $conn->close();
                                     <option value="Mantenimiento">Mantenimiento</option>
                                 </select>
                                 <input type="submit" name="change_status" value="Cambio" class="action-button">
+                            </form>
+                            <form method="POST" style="display:inline;">
+                                <input type="hidden" name="notebook_id" value="<?php echo htmlspecialchars($computer['NOMBRE']); ?>">
+                                <input type="submit" name="poner_mantenimiento" value="Enviar a Mantenimiento" class="action-button">
                             </form>
                         </td>
                     </tr>

@@ -57,7 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['finalizar'])) {
                 <li class="menu-item"><a href="../bases/manejo_Compu.php" class="logout-link"> Controlar las Notebooks --> </a></li>
                 <li class="menu-item"><a href="../bases/manejo_Usuario.php" class="logout-link"> Controlar de los usuarios --> </a></li>
                 <li class="menu-item"><a href="../bases/administracion.php" class="logout-link"> <-- Volver Atras</a></li>
-                <li class="menu-item"><a href="../bases/Principal.php" class="logout-link"> <-- Volver a la primera vista</a></li>
             </ul>
         </nav>
     </header>

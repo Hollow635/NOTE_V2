@@ -48,7 +48,7 @@ body {
 }
 
 .main-content h2 {
-    color: #333;
+    color: #00c3ffcc;
 }
 
 .action-button {
@@ -211,4 +211,46 @@ body {
     margin: 20px 0; /* Espaciado arriba y abajo */
     font-weight: bold; /* Haz que el texto sea negrita */
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Añade sombra para mayor visibilidad */
+}
+
+/* Barra de navegación - para alinear los botones a la derecha */
+.menu {
+    display: flex;              /* Usamos Flexbox para organizar los elementos en fila */
+    justify-content: flex;  /* Alinea los elementos a la derecha */
+    align-items: center;        /* Alinea los elementos verticalmente al centro */
+    gap: 20px;                  /* Añade espacio entre los botones */
+    margin-top: 10px;           /* Un pequeño margen superior para no pegarse al logo */
+}
+
+.menu-item {
+    list-style: none;           /* Elimina los puntos de la lista */
+}
+
+.menu-item a {
+    display: inline-block;       /* Hace que los enlaces se comporten como botones */
+    text-decoration: none;       /* Elimina el subrayado de los enlaces */
+    background-color: #ff0000;   /* Fondo verde */
+    color: white;                /* Color de texto blanco */
+    padding: 12px 20px;          /* Relleno del botón */
+    border-radius: 25px;         /* Bordes redondeados */
+    font-size: 16px;             /* Tamaño de fuente */
+    transition: all 0.3s ease;   /* Transición suave para hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombras para dar profundidad */
+}
+
+.menu-item a:hover {
+    background-color: #b81414;   /* Color verde más oscuro al hacer hover */
+    transform: translateY(-2px); /* Efecto de elevación al hacer hover */
+}
+
+/* Estilo del logo */
+.logo-container {
+    display: flex;
+    align-items: center;         /* Centra el logo verticalmente */
+}
+
+/* Estilo del logo */
+.logo {
+    height: 60px;                /* Ajusta el tamaño del logo */
+    margin-right: 20px;          /* Espacio a la derecha del logo */
 }
