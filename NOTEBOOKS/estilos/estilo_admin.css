@@ -1,0 +1,256 @@
+body {
+    background-image: url('../imagenes/oscuro.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    box-sizing: border-box; 
+  }
+
+.admin-container {
+    display: flex;
+    padding: 20px;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-right: 1px solid #ccc;
+}
+
+.sidebar h2 {
+    margin-top: 0;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.sidebar ul li a:hover {
+    color: #ff3232; /* Color de hover */
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.main-content h2 {
+    color: #00c3ffcc;
+}
+
+.action-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.action-button:hover {
+    background-color: #ff3333;
+}
+
+.footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #f4f4f4;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.user-list-container {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    margin-top: 20px;
+}
+
+.user-list-container table {
+    width: 100%;
+}
+
+.user-list-container th {
+    background-color: #e9ecef;
+}
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4); 
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.computer-list-container {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    margin-top: 20px;
+}
+
+.computer-list-container table {
+    width: 100%;
+}
+
+.computer-list-container th {
+    background-color: #e9ecef;
+}
+
+.sidebar ul li a {
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.admin-container, .user-list-container, .computer-list-container {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+.action-button {
+    background-color: #28a745; /* Verde */
+    color: white;
+    border: none;
+    padding: 8px 14px; /* Reducir el padding (espaciado interno) */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px; /* Reducir el tamaño de la fuente */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.action-button:hover {
+    background-color: #218838; /* Verde más oscuro */
+    transform: translateY(-2px); /* Efecto de elevación */
+}
+
+.admin-container {
+    display: flex;
+    justify-content: center; /* Centrar el contenido horizontalmente */
+    padding: 20px;
+}
+
+.sidebar {
+    width: 300px; /* Aumenta el ancho para un mejor diseño */
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    text-align: center; /* Centrar texto dentro de la barra lateral */
+}
+
+.sidebar h2 {
+    margin-bottom: 20px; /* Espacio debajo del título */
+}
+
+.sidebar ul li {
+    margin: 0 10px; /* Espacio horizontal entre los botones */
+}
+
+.sidebar ul li a {
+    padding: 30px 18px; /* Espaciado interno */
+    border-radius: 30px; /* Bordes redondeados */
+    border: 2px solid #ff0000; /* Borde rojo */
+    color: #ff0000; /* Color del texto */
+    text-transform: uppercase; /* Texto en mayúsculas */
+    font-size: 13px; /* Tamaño de fuente */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    transition: all 0.2s ease; /* Transición suave */
+    display: inline-block; /* Para que el padding funcione correctamente */
+    margin: 8px; /* Aumenta el espacio horizontal entre los botones */
+}
+
+.sidebar ul li a:hover {
+    color: #fff; /* Color del texto en hover */
+    background: #ff0000; /* Fondo rojo en hover */
+}
+
+.computer-list-title {
+    text-align: center; /* Centra el texto */
+    color: white; /* Cambia el color del texto, si lo deseas */
+    font-size: 24px; /* Ajusta el tamaño de la fuente */
+    margin: 20px 0; /* Espaciado arriba y abajo */
+    font-weight: bold; /* Haz que el texto sea negrita */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Añade sombra para mayor visibilidad */
+}
+
+/* Barra de navegación - para alinear los botones a la derecha */
+.menu {
+    display: flex;              /* Usamos Flexbox para organizar los elementos en fila */
+    justify-content: flex;  /* Alinea los elementos a la derecha */
+    align-items: center;        /* Alinea los elementos verticalmente al centro */
+    gap: 30px;                  /* Añade espacio entre los botones */
+    margin-top: 20px;           /* Un pequeño margen superior para no pegarse al logo */
+}
+
+.menu-item {
+    list-style: none;           /* Elimina los puntos de la lista */
+}
+
+.menu-item a {
+    display: inline-block;       /* Hace que los enlaces se comporten como botones */
+    text-decoration: none;       /* Elimina el subrayado de los enlaces */
+    background-color: #ff0000;   /* Fondo verde */
+    color: white;                /* Color de texto blanco */
+    padding: 10px 16px;          /* Relleno del botón */
+    border-radius: 22px;         /* Bordes redondeados */
+    font-size: 14px;             /* Tamaño de fuente */
+    transition: all 0.3s ease;   /* Transición suave para hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombras para dar profundidad */
+}
+
+.menu-item a:hover {
+    background-color: #b81414;   /* Color verde más oscuro al hacer hover */
+    transform: translateY(-2px); /* Efecto de elevación al hacer hover */
+}
+
+/* Estilo del logo */
+.logo-container {
+    display: flex;
+    align-items: center;         /* Centra el logo verticalmente */
+}
+
+/* Estilo del logo */
+.logo {
+    height: 60px;                /* Ajusta el tamaño del logo */
+    margin-right: 20px;          /* Espacio a la derecha del logo */
+}
