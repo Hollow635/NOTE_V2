@@ -123,7 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['devolver'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Realizar Reserva</title>
-    <link rel="stylesheet" href="../estilos/styles.css"> <!-- Enlace a la hoja de estilos -->
+    <link rel="stylesheet" href="../estilos/estilos.css"> <!-- Enlace a la hoja de estilos -->
     <link rel="icon" href="../imagenes/logo.ico"> <!-- Ícono de la pestaña -->
 </head>
 <body>

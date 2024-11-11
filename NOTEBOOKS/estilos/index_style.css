@@ -14,7 +14,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #0000007a;
+    background-color: #000000a9;
     padding: 15px;
 }
 
@@ -71,4 +71,16 @@ main a {
 
 main a:hover {
     text-decoration: underline;
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Efecto de deslizamiento para los enlaces */
+@keyframes slideIn {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(0); }
 }

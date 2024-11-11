@@ -90,7 +90,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['devolver'])) {
 <body>
     <header class="header">
         <div class="logo-container">
-            <img src="../imagenes/OK.png" alt="Escudo" class="logo"> <!-- Logo de la página -->
+            <img src="../imagenes/OK.png" alt="Escudo" class="logo"> 
+            <div class="school-name">Escuela Tecnica N°1 Otto Krause</div>
         </div>
         <nav class="menu">
             <ul class="menu-list">

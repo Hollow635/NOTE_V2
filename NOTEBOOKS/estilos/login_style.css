@@ -150,3 +150,24 @@ input::placeholder {
     }
     
 }
+
+.password-requirements ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.password-requirements li {
+    color: red; /* Rojo por defecto */
+}
+
+.password-requirements li.valid {
+    color: green; /* Verde cuando el requisito es válido */
+}
+
+.password-requirements li.invalid {
+    color: red; /* Rojo cuando el requisito no se cumple */
+}
+
+input[type="password"]:focus {
+    border: 2px solid #5e9bff; /* Color de borde azul al hacer foco */
+}

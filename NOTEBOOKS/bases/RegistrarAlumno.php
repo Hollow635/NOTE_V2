@@ -36,17 +36,20 @@ if (isset($_POST['register'])) {
         exit();
     }
 
+    // Verificar que los campos necesarios no estén vacíos
     if (strlen($_POST['name']) >= 1 && strlen($_POST['email']) >= 1 && strlen($_POST['password']) >= 1 &&
-        (!$division_valida || $especial_existe)) {
+        strlen($_POST['clave']) >= 1 && (!$division_valida || $especial_existe)) {
         
         $name = trim($_POST['name']);
         $email = trim($_POST['email']);
         $password = trim($_POST['password']);
+        $clave = trim($_POST['clave']); // Recupera la clave proporcionada por el usuario
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         $fecha = date("Y-m-d");
         $tipo_usuario = determinarTipoUsuario($name);
         $activo = 0; // Valor por defecto para la cuenta inactiva
 
+        // Verificar si el correo ya está registrado
         $checkEmailQuery = $conex->prepare("SELECT * FROM usuario WHERE email = ?");
         if (!$checkEmailQuery) {
             die("Error en la preparación de la consulta: " . $conex->error);
@@ -61,9 +64,10 @@ if (isset($_POST['register'])) {
         if ($checkEmailQuery->num_rows > 0) {
             echo "<h3 class='error'>El correo ya está registrado. Por favor, use un correo diferente.</h3>";
         } else {
-            $consulta = $conex->prepare("INSERT INTO usuario(nombre, email, contraseña, division, especialidad, tipo_usuario, fecha, activo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            // Insertar los datos del usuario en la base de datos, incluyendo la clave proporcionada por el usuario
+            $consulta = $conex->prepare("INSERT INTO usuario(nombre, email, contraseña, division, especialidad, tipo_usuario, fecha, activo, clave) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
             if ($consulta) {
-                $consulta->bind_param("sssssssd", $name, $email, $hashed_password, $division, $especialidad, $tipo_usuario, $fecha, $activo);
+                $consulta->bind_param("ssssssssd", $name, $email, $hashed_password, $division, $especialidad, $tipo_usuario, $fecha, $activo, $clave);
                 if ($consulta->execute()) {
                     // Mostrar mensaje de notificación en lugar de mensaje en verde
                     echo "<div id='success-notification' class='notification success-notification'>

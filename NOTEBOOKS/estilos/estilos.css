@@ -1,7 +1,9 @@
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(120deg, #ff9306, #2a86d1, #d0ff00); /* Gradiente con tres colores */
+    background-image: url('../imagenes/compus.png');
+    background-repeat: no-repeat;
+    background-position: center;
     background-size: cover;
     min-height: 100vh;
     display: flex;
@@ -24,7 +26,7 @@ body {
 .logo-container {
     display: flex;
     align-items: center;
-    gap: 10px; 
+    gap: 10px;
 }
 
 .logo {
@@ -43,9 +45,17 @@ body {
 .logo-container .school-name {
     font-size: 20px; /* Tamaño del texto */
     font-weight: bold;
-    color: #fff; /* Color blanco para que contraste con el fondo rojo */
+    color: #000000; /* Color blanco para que contraste con el fondo rojo */
     text-align: center;
     margin-left: 10px; /* Espacio entre el logo y el texto */
+}
+
+.no-available-message {
+    color: #00BFFF; /* Celeste */
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
 }
 
 .logo-container .logo:hover {

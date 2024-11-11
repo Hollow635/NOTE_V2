@@ -20,6 +20,7 @@ CREATE TABLE usuario (
     contraseña VARCHAR(100), 
     division VARCHAR(100), 
     especialidad VARCHAR(100), 
+    clave INT,
     tipo_usuario ENUM('admin', 'profesor', 'alumno') DEFAULT 'alumno',  
     fecha DATE 
 );
@@ -47,7 +48,7 @@ CREATE TABLE HISTORIAL_PRESTAMO (
 
 -- Crear tabla MANTENIMIENTO
 CREATE TABLE MANTENIMIENTO ( 
-    ID_MANTENIMIENTO INT PRIMARY KEY, 
+    ID_MANTENIMIENTO INT PRIMARY KEY AUTO_INCREMENT, 
     DESCRIPCION VARCHAR(255), 
     FECHA_MANTENIMIENTO DATE, 
     NOMBRE_COMPUTADORA VARCHAR(50),  
@@ -60,25 +61,6 @@ CREATE TABLE NOTEBOOKS_SOLICITADAS (
     FOREIGN KEY (ID_PRESTAMO) REFERENCES PRESTAMO(ID_PRESTAMO)
 );
 
-DELETE FROM COMPUTADORA
-	where NOMBRE = 'A11';
-    
--- Seleccionar / Mostrar cada tabla con su contenido por separado
 SELECT * FROM usuario;
 
-SELECT * FROM COMPUTADORA;
-
-SELECT * FROM PRESTAMO;
-
-SELECT * FROM HISTORIAL_PRESTAMO;
-
-SELECT * FROM MANTENIMIENTO;
-
-SELECT * FROM NOTEBOOKS_SOLICITADAS;
-
-DELETE FROM usuario WHERE id = 6;
-
 ALTER TABLE usuario ADD COLUMN activo TINYINT(1) DEFAULT 0;
-
--- revisa si es necesario la existencia de la tabla NOTEBOOKS_SOLICITADAS ya que al parecer id_solicitud y id_prestamo son iguales
--- esto lo ves mañana

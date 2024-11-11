@@ -1,10 +1,10 @@
-<!DOCTYPE html>   <!-- Formulario para que ul usuario pueda registrarse, solo front-end  -->
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Administrador</title>
-    <link rel="stylesheet" href="../estilos/register_style.css"> <!-- Asegúrate de que la ruta sea correcta -->
+    <link rel="stylesheet" href="../estilos/register_style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="icon" href="../imagenes/logo.ico">
 </head>
@@ -40,6 +40,11 @@
                 <li id="number" class="invalid">Debe incluir al menos un número</li>
             </ul>
         </div>
+
+        <!-- Campo para ingresar la clave de recuperación -->
+        <div class="input-wrapper">
+            <input type="text" name="clave" id="clave" placeholder="Clave Numérica (5-8 dígitos)" pattern="^\d{5,8}$" required="">
+        </div>
         
         <!-- Botón para enviar el formulario -->
         <input class="btn" type="submit" value="Registrar">
@@ -47,6 +52,7 @@
         <!-- Enlace para volver a la página anterior o al inicio -->
         <p><a href="../bases/index.php" class="create-account">Volver al inicio</a></p>
     </form>
+
     <script src="../js/script.js"></script>
     <script src="../js/form_animate.js"></script> <!-- Enlace a otro script JavaScript -->
 </body>

@@ -8,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nombre = mysqli_real_escape_string($conex, $_POST['nombre']);
     $email = mysqli_real_escape_string($conex, $_POST['email']);
     $contraseña = mysqli_real_escape_string($conex, $_POST['password']); // Asegúrate de usar 'password'
+    $clave = mysqli_real_escape_string($conex, $_POST['clave']); // Recuperar la clave ingresada por el administrador
     
     // Encriptar la contraseña usando un hash seguro
     $contraseña_hash = password_hash($contraseña, PASSWORD_DEFAULT);
@@ -43,10 +44,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     } else {
         // Preparar la consulta para insertar el nuevo administrador
-        $consulta = $conex->prepare("INSERT INTO usuario (nombre, email, contraseña, tipo_usuario, fecha) VALUES (?, ?, ?, ?, ?)");
+        $consulta = $conex->prepare("INSERT INTO usuario (nombre, email, contraseña, tipo_usuario, fecha, clave) VALUES (?, ?, ?, ?, ?, ?)");
         if ($consulta) { 
             // Vincular parámetros para la consulta de inserción
-            $consulta->bind_param("sssss", $nombre, $email, $contraseña_hash, $tipo_usuario, $fecha);
+            $consulta->bind_param("ssssss", $nombre, $email, $contraseña_hash, $tipo_usuario, $fecha, $clave);
             // Ejecutar la consulta
             if ($consulta->execute()) {
                 // Mensaje de éxito y redirección

@@ -39,8 +39,8 @@ if ($result->num_rows > 0) {
         ];
     }
 } else {
-    // Mensaje si no hay computadoras disponibles
-    echo "No hay computadoras disponibles.";
+    // Indica que no hay computadoras disponibles
+    $noComputersAvailable = true;
 }
 
 // Cierra la conexión a la base de datos
@@ -54,23 +54,39 @@ $conn->close();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estado de Computadoras</title>
-    <link rel="stylesheet" href="../estilos/styles.css"> <!-- Enlace a la hoja de estilos -->
+    <link rel="stylesheet" href="../estilos/estilos.css"> <!-- Enlace a la hoja de estilos -->
     <link rel="icon" href="../imagenes/logo.ico"> <!-- Icono de la pestaña -->
+    <style>
+        /* Estilo para el mensaje de "No hay computadoras disponibles" */
+        .no-available-message {
+            color: #00BFFF; /* Celeste */
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <header class="header">
-        <div class="logo-container">
-            <img src="../imagenes/OK.png" alt="Escudo" class="logo"> 
+<header class="header">
+    <div class="logo-container">
+        <img src="../imagenes/OK.png" alt="Escudo" class="logo"> 
+        <div class="school-name">Escuela Tecnica N°1 Otto Krause</div>
+    </div>
+    <nav class="menu">
+        <ul class="menu-list">
+            <li class="menu-item">Nombre de Usuario: <br> <?php echo htmlspecialchars($name); ?> <br> Email: <?php echo htmlspecialchars($email); ?></li>
+            <li class="menu-item"><a href="../bases/CerrarSesion.php" class="logout-link">Cerrar Sesión</a></li>
+        </ul>
+    </nav>
+
+    <!-- Mostrar mensaje si no hay computadoras disponibles -->
+    <?php if (isset($noComputersAvailable) && $noComputersAvailable): ?>
+        <div class="no-available-message">
+            No hay computadoras disponibles.
         </div>
-        <nav class="menu">
-            <ul class="menu-list">
-                <!-- Muestra el nombre y correo del usuario -->
-                <li class="menu-item">Nombre de Usuario: <br> <?php echo htmlspecialchars($name); ?> <br> Email: <?php echo htmlspecialchars($email); ?></li>
-                <!-- Enlace para cerrar sesión -->
-                <li class="menu-item"><a href="../bases/CerrarSesion.php" class="logout-link">Cerrar Sesión</a></li>
-            </ul>
-        </nav>
-    </header>
+    <?php endif; ?>
+</header>
 
     <main class="main-content">
         <div class="status-title">

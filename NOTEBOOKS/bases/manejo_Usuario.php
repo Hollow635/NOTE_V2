@@ -148,8 +148,8 @@ $conn->close(); // Cierra la conexión
                 <th>Email</th>
                 <th>Tipo de Usuario</th>
                 <th>Especialidad</th>
-                <th>Estado</th>
-                <th>División</th> <!-- Nueva columna para la división -->
+                <th>División</th> <!-- Ahora la división está antes del estado -->
+                <th>Estado</th> <!-- Estado ahora está después de división -->
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -161,8 +161,7 @@ $conn->close(); // Cierra la conexión
                     <td><?php echo htmlspecialchars($row['email']); ?></td>
                     <td><?php echo htmlspecialchars($row['tipo_usuario']); ?></td>
                     <td><?php echo htmlspecialchars($row['especialidad']); ?></td>
-                    <td><?php echo $row['activo'] ? 'Activo' : 'Deshabilitado'; ?></td>
-
+                    
                     <!-- Mostrar la división solo si el usuario es un 'Alumno' -->
                     <td>
                         <?php 
@@ -173,6 +172,8 @@ $conn->close(); // Cierra la conexión
                             }
                         ?>
                     </td>
+
+                    <td><?php echo $row['activo'] ? 'Activo' : 'Deshabilitado'; ?></td>
 
                     <td>
                         <form method="POST">
