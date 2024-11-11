@@ -134,26 +134,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['devolver'])) {
         <?php endif; ?>
     </header>
     <main class="main-content">
-        <form method="POST" action="">
-            <label for="cantidad">Cantidad de computadoras (máx. 12):</label>
-            <input type="number" id="cantidad" name="cantidad" min="1" max="12" required>
-            <br><br>
-            
-            <label for="horaInicio">Hora de inicio del préstamo:</label>
-            <input type="time" id="horaInicio" name="horaInicio" required>
-            <br><br>
-            
-            <label for="horaFin">Hora de fin del préstamo:</label>
-            <input type="time" id="horaFin" name="horaFin" required>
-            <br><br>
-            
-            <input type="submit" value="Hacer Reserva" class="request-button"> <!-- Botón para hacer reserva -->
-            <input type="button" value="Volver Atras" class="request-button" onclick="location.href='../bases/servicio_basico.php'"> <!-- Botón para volver atrás -->
-            <?php if ($prestamoRealizado): ?>
-                <input type="button" value="Info de mi Préstamo" class="request-button" onclick="openModal()" style="margin-left: 10px;"> <!-- Botón para mostrar info del préstamo -->
-                <button type="button" onclick="generarPDF()" class="request-button" style="margin-left: 10px;">Generar PDF</button> <!-- Botón para generar PDF -->
-            <?php endif; ?>
-        </form>
+    <form method="POST" action="">
+        <label for="cantidad">Cantidad de computadoras (máx. 12):</label>
+        <input type="number" id="cantidad" name="cantidad" min="1" max="12" required>
+        <br><br>
+        
+        <label for="horaInicio">Hora de inicio del préstamo:</label>
+        <input type="time" id="horaInicio" name="horaInicio" required>
+        <br><br>
+        
+        <label for="horaFin">Hora de fin del préstamo:</label>
+        <input type="time" id="horaFin" name="horaFin" required>
+        <br><br>
+        
+        <input type="submit" value="Hacer Reserva" class="request-button">
+        <input type="button" value="Volver Atras" class="request-button" onclick="location.href='../bases/servicio_basico.php'">
+        <?php if ($prestamoRealizado): ?>
+            <input type="button" value="Info de mi Préstamo" class="request-button" onclick="openModal()" style="margin-left: 10px;">
+            <button type="button" onclick="generarPDF()" class="request-button" style="margin-left: 10px;">Generar PDF</button>
+        <?php endif; ?>
+
+        <!-- Campo oculto para la hora local -->
+        <input type="hidden" id="horaPrestamo" name="horaPrestamo">
+    </form>
 
         <?php if ($message): ?> <!-- Muestra mensaje si existe -->
             <div class="message" style="margin-top: 20px;">
@@ -181,31 +184,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['devolver'])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
         async function generarPDF() {
-            const { jsPDF } = window.jspdf; // Importa la librería jsPDF
-            const doc = new jsPDF(); // Crea una nueva instancia de jsPDF
-            const nombreUsuario = "<?php echo htmlspecialchars($nombreUsuario); ?>"; // Obtiene el nombre del usuario
-            const emailUsuario = "<?php echo htmlspecialchars($emailUsuario); ?>"; // Obtiene el email del usuario
-            const cantidad = "<?php echo htmlspecialchars($cantidad); ?>"; // Obtiene la cantidad de computadoras
-            const horaInicio = "<?php echo htmlspecialchars($horaInicio); ?>"; // Hora de inicio
-            const horaFin = "<?php echo htmlspecialchars($horaFin); ?>"; // Hora de fin
-            const fechaActual = "<?php echo htmlspecialchars($fechaActual); ?>"; // Fecha actual
-            const notebooksAsignadas = "<?php echo implode(', ', $reservadas); ?>"; // Notebooks asignadas
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
 
-            // Configura el contenido del PDF
-            doc.setFontSize(16);
-            doc.text("Comprobante de Préstamo de Notebooks", 10, 20);
-            doc.text("------------------------------------------------------------------------------------------------", 10, 30);
-            doc.text("Nombre: " + nombreUsuario, 10, 40);
-            doc.text("Email: " + emailUsuario, 10, 50);
-            doc.text("Cantidad de Computadoras: " + cantidad, 10, 60);
-            doc.text("Hora de Inicio del préstamo: " + horaInicio, 10, 70);
-            doc.text("Hora de Fin del préstamo: " + horaFin, 10, 80);
-            doc.text("Fecha Actual: " + fechaActual, 10, 90);
-            doc.text("Se les asignarán las siguientes notebooks: ", 10 , 100);
-            doc.text("Notebooks: " + notebooksAsignadas, 10, 110);
+    // Obtener datos desde PHP y JavaScript
+    const nombreUsuario = "<?php echo htmlspecialchars($nombreUsuario); ?>";
+    const emailUsuario = "<?php echo htmlspecialchars($emailUsuario); ?>";
+    const cantidad = "<?php echo htmlspecialchars($cantidad); ?>";
+    const horaInicio = "<?php echo htmlspecialchars($horaInicio); ?>";
+    const horaFin = "<?php echo htmlspecialchars($horaFin); ?>";
+    const fechaActual = "<?php echo htmlspecialchars($fechaActual); ?>";
+    const notebooksAsignadas = "<?php echo implode(', ', $reservadas); ?>";
+    
+    // Obtener la hora local actual desde el formulario oculto
+    const horaPrestamo = document.getElementById('horaPrestamo').value;
 
-            doc.save("comprobante_prestamo.pdf"); // Descarga el PDF generado
-        }
+    // Configurar el contenido del PDF
+    doc.setFontSize(16);
+    doc.text("Comprobante de Préstamo de Notebooks", 10, 20);
+    doc.text("------------------------------------------------------------------------------------------------", 10, 30);
+    doc.text("Nombre: " + nombreUsuario, 10, 40);
+    doc.text("Email: " + emailUsuario, 10, 50);
+    doc.text("Cantidad de Computadoras: " + cantidad, 10, 60);
+    doc.text("Hora de Inicio del préstamo: " + horaInicio, 10, 70);
+    doc.text("Hora de Fin del préstamo: " + horaFin, 10, 80);
+    doc.text("Fecha Actual: " + fechaActual, 10, 90);
+    doc.text("Hora de Préstamo: " + horaPrestamo, 10, 100);  // Mostrar la hora del préstamo
+    doc.text("Se les asignarán las siguientes notebooks: ", 10 , 110);
+    doc.text("Notebooks: " + notebooksAsignadas, 10, 120);
+
+    doc.save("comprobante_prestamo.pdf"); // Descargar el PDF generado
+}
 
         function openModal() {
             document.getElementById("myModal").style.display = "block"; // Muestra el modal
@@ -215,5 +224,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['devolver'])) {
             document.getElementById("myModal").style.display = "none"; // Oculta el modal
         }
     </script>
+
+    <script src="../js/escript.js"></script>
 </body>
 </html>
