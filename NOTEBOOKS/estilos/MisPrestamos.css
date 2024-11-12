@@ -1,0 +1,548 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-image: url('../imagenes/compus.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    display: flex;
+    flex-direction: row; /* Asegúrate de que se mantenga en fila */
+    align-items: center;
+    justify-content: space-between; /* O ajusta según sea necesario */
+    background-color: #ff3232;
+    padding: 10px 20px;
+    width: 100%; 
+    box-sizing: border-box;
+    overflow: hidden; /* Evita que el contenido se desborde */
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo {
+    width: 80px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.logo-container .logo {
+    width: 50px; /* Ajusta el tamaño del logo */
+    height: auto;
+    vertical-align: middle;
+    transition: transform 0.3s ease;
+}
+
+.logo-container .school-name {
+    font-size: 20px; /* Tamaño del texto */
+    font-weight: bold;
+    color: #000000; /* Color blanco para que contraste con el fondo rojo */
+    text-align: center;
+    margin-left: 10px; /* Espacio entre el logo y el texto */
+}
+
+.no-available-message {
+    color: #00BFFF; /* Celeste */
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.logo-container .logo:hover {
+    transform: scale(1.1);
+}
+
+.menu {
+    flex: 1; 
+    display: flex;
+    justify-content: flex-end; 
+}
+
+.menu-list {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-item {
+    padding: 10px 20px;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+.menu-item:not(:last-child) {
+    border-right: 1px solid #ffffff; 
+}
+
+.menu-item:hover {
+    background-color: #ff4d4d; 
+}
+
+.main-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.status-title {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.status-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 50px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.computer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.computer-item {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+
+.computer-item:hover {
+    transform: translateY(-5px);
+}
+
+.status {
+    width: 20px; /* Tamaño del indicador */
+    height: 20px; /* Tamaño del indicador */
+    border-radius: 50%; /* Para que sea circular */
+    display: inline-block; /* Para que se muestre en línea */
+}
+
+.status-container {
+    display: flex;
+    flex-wrap: wrap; /* Esto permitirá que las listas de A-F y G-L se alineen mejor si necesitan espacio */
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 50px;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.form-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+label {
+    font-size: 1.2em; /* Aumentar tamaño del texto */
+}
+input[type="number"],
+input[type="time"],
+input[type="submit"] {
+    font-size: 1.1em; /* Aumentar tamaño de los inputs */
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box; /* Para que el padding no afecte el ancho total */
+    margin-bottom: 15px; /* Espaciado entre inputs */
+}
+
+.available {
+    background-color: #4CAF50;  /*green*/
+}
+
+.unavailable {
+    background-color: #FF3333; /*rojo*/
+}
+
+.maintenance {
+    background-color: #FFA500;  /*yellow*/
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; 
+}
+
+/* Estilos para la modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    transition: transform 0.3s ease;
+    transform: scale(0);
+    animation: modalOpen 0.3s forwards;
+}
+
+@keyframes modalOpen {
+    to {
+        transform: scale(1);
+    }
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.request-button,
+.menu-item a,
+.logout-link {
+    background-color: #ff4d4d;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.request-button:hover,
+.menu-item a:hover,
+.logout-link:hover {
+    background-color: #ff3333;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.menu-item a {
+    text-decoration: none;
+    color: white;
+}
+
+/* Input Fields */
+input[type="submit"],
+select {
+    padding: 12px;
+    font-size: 1.1em;
+    width: 100%;
+    margin-bottom: 15px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+input[type="submit"]:hover,
+select:hover {
+    border-color: #ff4d4d;
+}
+
+@media (max-width: 600px) {
+    .status-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .computer-list {
+        gap: 5px;
+    }
+    .header {
+        padding: 10px; /* Ajusta el padding si es necesario */
+    }
+    .header h1 {
+        font-size: 1.5em; /* Reduce el tamaño de la fuente en móviles */
+    }
+    .menu-item {
+        padding: 5px 8px; /* Ajusta el padding para pantallas pequeñas */
+        font-size: 0.9em;
+    }
+    .computer-item {
+        gap: 15px;
+        font-size: 0.9em;
+    }
+
+    .modal-content {
+        width: 95%; /* Asegura que los modales no se vean demasiado grandes en móviles */
+    }
+}
+
+@media (max-width: 600px) {
+    .header {
+        flex-direction: column; /* Cambia a columna si es necesario */
+        align-items: center; /* Centra los elementos */
+        padding: 15px; /* Ajusta el padding si es necesario */
+    }
+    .menu {
+        margin-top: 10px; /* Espaciado adicional entre logo y menú si cambias a columna */
+    }
+    .logo {
+        width: 40px;
+        height: auto;
+    }
+}
+
+.request-button {
+    background-color: #ff4d4d; /* Rojo */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.request-button:hover {
+    background-color: #ff3333;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.success {
+    position: absolute;
+    top: 50px;
+    color: #00C83C;
+    font-size: 18px;
+}
+
+.resultado {
+    position: absolute;
+    top: 50px;
+    color: #00a2ff;
+    font-size: 18px;
+}
+
+.computer-list-a {
+    display: flex;
+    flex-direction: column; /* Alinea los elementos en columna */
+    gap: 10px; /* Espaciado entre las notebooks */
+}
+
+/* Contenedor de las columnas */
+.status-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Columna de computadoras agrupadas por letra */
+.computer-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0 20px; /* Espaciado entre columnas */
+}
+
+.computer-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    border: 1px solid #ccc;
+    width: 120px;
+    cursor: pointer;
+    margin-bottom: 10px; /* Espaciado entre computadoras */
+}
+
+.available {
+    background-color: #4CAF50;
+}
+
+.unavailable {
+    background-color: #ff3333;
+}
+
+.maintenance {
+    background-color: #ffa500;
+}
+
+.status {
+    width: 20px; /* Tamaño del indicador */
+    height: 20px; /* Tamaño del indicador */
+    border-radius: 50%; /* Para que sea circular */
+    display: inline-block; /* Para que se muestre en línea */
+}
+
+/* Modal para mostrar detalles */
+.modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.close {
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .status-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .computer-column {
+        width: 100%;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu-item {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+
+    .computer-item {
+        font-size: 14px;
+        gap: 15px;
+    }
+
+    .modal-content {
+        width: 90%;
+    }
+}
+
+input[type="submit"],
+select {
+    padding: 12px;
+    font-size: 1.1em;
+    width: 100%;
+    margin-bottom: 15px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+input[type="submit"]:hover,
+select:hover {
+    border-color: #ff4d4d;
+}
+
+.prestamo-table-container {
+    width: 100%;
+    overflow-x: auto; /* Hace que la tabla sea desplazable en pantallas pequeñas */
+    margin-top: 20px;
+}
+
+.prestamo-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil para un toque moderno */
+}
+
+.prestamo-table th,
+.prestamo-table td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd; /* Línea suave entre las filas */
+}
+
+.prestamo-table th {
+    background-color: #ff3232; /* Fondo rojo para los encabezados */
+    color: white;
+    font-weight: bold;
+}
+
+.prestamo-table tr:hover {
+    background-color: #f1f1f1; /* Fondo gris claro al pasar el mouse */
+}
+
+.estado-disponible {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.estado-no-disponible {
+    background-color: #FF3333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.estado-mantenimiento {
+    background-color: #FFA500;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.no-available-message {
+    color: #00BFFF; /* Celeste */
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+}

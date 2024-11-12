@@ -74,11 +74,15 @@ $conn->close();
         <div class="school-name">Escuela Tecnica N°1 Otto Krause</div>
     </div>
     <nav class="menu">
-        <ul class="menu-list">
-            <li class="menu-item">Nombre de Usuario: <br> <?php echo htmlspecialchars($name); ?> <br> Email: <?php echo htmlspecialchars($email); ?></li>
-            <li class="menu-item"><a href="../bases/CerrarSesion.php" class="logout-link">Cerrar Sesión</a></li>
-        </ul>
-    </nav>
+    <ul class="menu-list">
+        <li class="menu-item">Nombre de Usuario: <br> <?php echo htmlspecialchars($name); ?> <br> Email: <?php echo htmlspecialchars($email); ?></li>
+        <!-- Botón "Mis Préstamos" -->
+        <li class="menu-item"><a href="../bases/MisPrestamos.php" class="mis-prestamos-link">Mis Préstamos</a></li>
+        <!-- Botón "Cerrar sesión" -->
+        <li class="menu-item"><a href="../bases/CerrarSesion.php" class="logout-link">Cerrar Sesión</a></li>
+    </ul>
+</nav>
+
 
     <!-- Mostrar mensaje si no hay computadoras disponibles -->
     <?php if (isset($noComputersAvailable) && $noComputersAvailable): ?>
